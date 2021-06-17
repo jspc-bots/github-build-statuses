@@ -12,9 +12,11 @@ This bot requires the following env vars:
 * `$GITHUB_TOKEN` - a github token with notifications and actions enabled
 * `$SASL_USER` - the user to connect with
 * `$SASL_PASSWORD` - the password to connect with
-* `$SASL_MECHANISM` - the sasl mechanism, defaults to 'PLAIN'
 * `$SERVER` - IRC connection details, as `irc://server:6667` or `ircs://server:6697` (`ircs` implies irc-over-tls)
-* `$VERIFY_TLS` - Verify TLS, or sack it off. This is of interest to people, like me, running an ircd on localhost with a self-signed cert
+* `$VERIFY_TLS` - Verify TLS, or sack it off. This is of interest to people, like me, running an ircd on localhost with a self-signed cert. Matches "true" as true, and anything else as false
+* `$POLL_PERIOD` - Time, in seconds, between polls of the github notification endpoint
+
+The SASL mechanism is hardcoded to PLAIN. It's not a big job to change, I just don't know how to test it.
 
 ## Building
 
