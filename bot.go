@@ -60,10 +60,10 @@ func (b *Bot) addHandlers() (err error) {
 	b.routing = make(map[*regexp.Regexp]handlerFunc)
 
 	// Matches `run jspc/irc-build-bot main.yaml for v1.2.1`, `run jspc/irc-build-bot 1 for gh-pages` (and variations), building specified reference
-	b.routing[regexp.MustCompile(`run\s+(\w+)\/(\w+)\s+(\S+)\s+for\s+(\S+)`)] = b.trigger
+	b.routing[regexp.MustCompile(`run\s+([\w\-\_]+)\/([\w\-\_\.]+)\s+(\S+)\s+for\s+(\S+)`)] = b.trigger
 
 	// Matches `run jspc/irc-build-bot main.yaml`, `run jspc/irc-build-bot 1` (and variations), building main branch
-	b.routing[regexp.MustCompile(`run\s+(\w+)\/(\w+)\s+(\S+)$`)] = b.trigger
+	b.routing[regexp.MustCompile(`run\s+([\w\-\_]+)\/([\w\-\_\.]+)\s+(\S+)$`)] = b.trigger
 
 	// Route messages
 	b.client.Handlers.Add(girc.PRIVMSG, b.messageRouter)
