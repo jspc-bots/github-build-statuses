@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"log"
 	"os"
 	"strconv"
 	"time"
@@ -60,7 +61,7 @@ func main() {
 	for range ticker.C {
 		err = c.processNotifications()
 		if err != nil {
-			panic(err)
+			log.Print(err)
 		}
 	}
 }
