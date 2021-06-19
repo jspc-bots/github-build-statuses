@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"log"
 	"os"
 	"strconv"
 	"time"
@@ -53,14 +54,14 @@ func main() {
 		panic(err)
 	}
 
-	go c.client.Connect()
+	go c.bottom.Client.Connect()
 
 	ticker := time.NewTicker(time.Second * time.Duration(seconds))
 
 	for range ticker.C {
 		err = c.processNotifications()
 		if err != nil {
-			panic(err)
+			log.Print(err)
 		}
 	}
 }
