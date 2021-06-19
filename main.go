@@ -54,7 +54,7 @@ func main() {
 		panic(err)
 	}
 
-	go c.client.Connect()
+	go c.bottom.Client.Connect()
 
 	ticker := time.NewTicker(time.Second * time.Duration(seconds))
 
