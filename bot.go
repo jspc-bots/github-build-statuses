@@ -39,7 +39,7 @@ func New(user, password, server string, verify bool, gh *github.Client) (b Bot, 
 	return
 }
 
-func (b Bot) trigger(sender string, groups []string) (err error) {
+func (b Bot) trigger(sender, channel string, groups []string) (err error) {
 	if len(groups) < 4 && len(groups) > 5 {
 		return fmt.Errorf("somehow ended up with %d groups, expected at least 3, at most 4", len(groups))
 	}
@@ -56,7 +56,7 @@ func (b Bot) trigger(sender string, groups []string) (err error) {
 		ref = "main"
 	}
 
-	b.bottom.Client.Cmd.Messagef(Chan, "Running workflow %q on %q/%q (ref: %q)", workflow, owner, repo, ref)
+	b.bottom.Client.Cmd.Messagef(channel, "Running workflow %q on %q/%q (ref: %q)", workflow, owner, repo, ref)
 
 	// Use an intermediate error here to avoid accidentally returning
 	// the wrong error
@@ -70,9 +70,9 @@ func (b Bot) trigger(sender string, groups []string) (err error) {
 	_, err = b.github.Actions.CreateWorkflowDispatchEventByFileName(context.Background(), owner, repo, workflow, github.CreateWorkflowDispatchEventRequest{Ref: ref})
 
 	if err != nil {
-		b.bottom.Client.Cmd.Messagef(Chan, "I got this error from github :/ %v", err)
+		b.bottom.Client.Cmd.Messagef(channel, "I got this error from github :/ %v", err)
 	} else {
-		b.bottom.Client.Cmd.Message(Chan, "Job triggered (seemingly)")
+		b.bottom.Client.Cmd.Message(channel, "Job triggered (seemingly)")
 	}
 
 	return
