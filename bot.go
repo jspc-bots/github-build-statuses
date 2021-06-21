@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/google/go-github/v35/github"
-	"github.com/jspc/bottom"
+	"github.com/jspc-bots/bottom"
 	"github.com/lrstanley/girc"
 )
 
